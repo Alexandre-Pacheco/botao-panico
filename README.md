@@ -14,8 +14,7 @@ A aplicação está publicada na nuvem e pode ser acessada através do link abai
 <img width="1163" height="557" alt="Opera Instantâneo_2025-07-30_030802_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/2095418f-57b7-490f-8399-46e10c86dd9a" />
 <img width="1076" height="798" alt="Opera Instantâneo_2025-07-30_030918_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/24248114-b660-4572-ad38-b8f4fde420f5" />
 <img width="997" height="712" alt="Opera Instantâneo_2025-07-30_030841_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/c9e573b8-5e6c-4ad3-94e6-0e2f2d177b4e" />
-
-
+<img width="1165" height="1092" alt="Opera Instantâneo_2025-07-30_095021_gemini google com" src="https://github.com/user-attachments/assets/7a5ea518-677b-48a4-abb1-120a6cd55500" />
 
 
 
