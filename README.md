@@ -1,6 +1,6 @@
 # Sistema de Botão de Pânico \- IFPB 
 
-Este projeto foi desenvolvido por **Alexandre Freitas de Lima Pacheco** e **Robson Luan Fernandes Pereira** para a disciplina de Padrões de Projetos do curso de Engenharia da Computação do IFPB.
+Este projeto foi desenvolvido por **Alexandre Freitas de Lima Pacheco** e **Robson Luan Fernandes Pereira** para a disciplina de Padrões de Projetos do curso de Engenharia de Computação do IFPB.
 
 ### **🚀 Demonstração ao Vivo**
 
