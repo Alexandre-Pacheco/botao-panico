@@ -29,16 +29,17 @@
 </head>
 <body class="bg-blue-800 text-white flex items-center justify-center min-h-screen">
 
-    <div id="app" class="w-full max-w-6xl mx-auto p-4">
+    <div id="app" class="w-full max-w-4xl mx-auto p-4">
 
         <header class="text-center mb-8">
             <h1 class="text-4xl font-bold">Sistema de Pânico IFPB</h1>
             <p class="text-lg mt-2">Uma solução para a segurança da comunidade acadêmica.</p>
+            <!-- NOVO: Indicador de Status da Conexão -->
             <p id="server-status" class="text-sm mt-4 font-semibold"></p>
         </header>
 
         <!-- TELA 1: SELEÇÃO DE PERFIL -->
-        <div id="profile-selection-view" class="text-center max-w-lg mx-auto">
+        <div id="profile-selection-view" class="text-center">
             <h2 class="text-2xl font-semibold mb-6">Selecione seu perfil de acesso</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <button id="show-user-view-btn" class="bg-white/20 hover:bg-white/30 p-8 rounded-lg text-xl font-semibold transition-all duration-300">
@@ -53,7 +54,7 @@
         <!-- TELA 2: VISÃO DO USUÁRIO -->
         <div id="user-view" class="hidden">
             <button class="back-to-profile-selection mb-4 bg-white/20 hover:bg-white/30 p-2 rounded">&larr; Voltar</button>
-            <div class="bg-white/10 p-8 rounded-lg text-center max-w-md mx-auto">
+            <div class="bg-white/10 p-8 rounded-lg text-center">
                 <h2 class="text-2xl font-bold mb-6">Painel do Usuário</h2>
                 <div class="max-w-xs mx-auto space-y-4 text-left">
                     <div>
@@ -95,16 +96,19 @@
                 <h1 class="text-3xl font-bold">Painel do Administrador</h1>
                 <button id="logout-btn" class="bg-red-600 hover:bg-red-700 p-2 rounded">&larr; Sair</button>
             </div>
-            <div class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 overflow-hidden">
+            <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden">
                 <!-- Coluna da Central de Monitoramento -->
-                <div class="bg-white/10 rounded-lg p-4 flex flex-col lg:col-span-1">
+                <div class="bg-white/10 rounded-lg p-4 flex flex-col">
                     <h2 class="text-xl font-semibold mb-4">Central de Monitoramento</h2>
-                    <div id="alerts-panel" class="flex-grow overflow-y-auto space-y-4 pr-2"></div>
+                    <div id="alerts-panel" class="flex-grow overflow-y-auto space-y-4 pr-2">
+                        <!-- Alertas serão inseridos aqui -->
+                    </div>
                 </div>
-                <!-- Coluna de Gerenciamento de Usuários -->
-                <div class="bg-white/10 rounded-lg p-4 flex flex-col lg:col-span-1 overflow-hidden">
+                <!-- Coluna de Gerenciamento -->
+                <div class="bg-white/10 rounded-lg p-4 flex flex-col overflow-hidden">
                     <div class="flex-shrink-0">
-                        <h2 class="text-xl font-semibold mb-4">Gerenciar Usuários</h2>
+                        <h2 class="text-xl font-semibold mb-4">Gerenciamento</h2>
+                        <!-- Formulário de Cadastro -->
                         <form id="add-user-form" class="bg-white/10 p-4 rounded-lg space-y-3 mb-6">
                              <h3 class="font-semibold">Cadastrar Novo Usuário</h3>
                              <input type="text" id="new-user-name" placeholder="Nome completo" required class="w-full p-2 rounded bg-gray-900/50 border border-white/20">
@@ -116,27 +120,12 @@
                              <button type="submit" class="w-full bg-green-600 hover:bg-green-700 p-2 rounded font-semibold">Adicionar Usuário</button>
                         </form>
                     </div>
+                     <!-- Lista de Usuários -->
                     <div class="flex-grow overflow-y-auto pr-2">
                         <h3 class="font-semibold mb-2">Usuários Cadastrados</h3>
-                        <div id="user-list-panel" class="space-y-2"></div>
-                    </div>
-                </div>
-                <!-- NOVA COLUNA: Gerenciamento de Administradores -->
-                <div class="bg-white/10 rounded-lg p-4 flex flex-col lg:col-span-1 overflow-hidden">
-                    <div class="flex-shrink-0">
-                        <h2 class="text-xl font-semibold mb-4">Gerenciar Administradores</h2>
-                        <form id="add-admin-form" class="bg-white/10 p-4 rounded-lg space-y-3 mb-6">
-                             <h3 class="font-semibold">Cadastrar Novo Admin</h3>
-                             <input type="text" id="new-admin-name" placeholder="Nome do novo admin" required class="w-full p-2 rounded bg-gray-900/50 border border-white/20">
-                             <input type="text" id="new-admin-cpf" placeholder="CPF do novo admin" required class="w-full p-2 rounded bg-gray-900/50 border border-white/20">
-                             <input type="password" id="new-admin-password" placeholder="Nova senha" required class="w-full p-2 rounded bg-gray-900/50 border border-white/20">
-                             <input type="password" id="master-password" placeholder="Senha Mestra (senhaMestra123)" required class="w-full p-2 rounded bg-gray-900/50 border border-white/20">
-                             <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 p-2 rounded font-semibold">Adicionar Admin</button>
-                        </form>
-                    </div>
-                    <div class="flex-grow overflow-y-auto pr-2">
-                        <h3 class="font-semibold mb-2">Admins Cadastrados</h3>
-                        <div id="admin-list-panel" class="space-y-2"></div>
+                        <div id="user-list-panel" class="space-y-2">
+                            <!-- Lista será inserida aqui -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,8 +136,13 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
+        // ========================================================================
+        // API URL - Conexão com o Servidor Java
+        // ========================================================================
         const API_BASE_URL = 'https://servidor-panico-ifpb.onrender.com/api';
 
+
+        // === GERENCIAMENTO DE VIEWS (TELAS) ===
         const views = {
             profile: document.getElementById('profile-selection-view'),
             user: document.getElementById('user-view'),
@@ -164,24 +158,62 @@
             }
         };
 
+        // === LÓGICA DO CLIENTE (FRONTEND) ===
+
+        // --- Funções de Comunicação com a API (Backend) ---
         const api = {
-            async getUsers() { const r = await fetch(${API_BASE_URL}/users); if (!r.ok) throw new Error('Failed to fetch users'); return r.json(); },
-            async addUser(user) { return fetch(${API_BASE_URL}/users, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) }); },
-            async removeUser(userId) { await fetch(${API_BASE_URL}/users/${userId}, { method: 'DELETE' }); },
-            async login(cpf, password) { const r = await fetch(${API_BASE_URL}/login, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cpf, password }) }); return r.ok; },
-            async triggerPanic(userId) { await fetch(${API_BASE_URL}/panic, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId }) }); },
-            async getIncidents() { const r = await fetch(${API_BASE_URL}/incidents); if (!r.ok) throw new Error('Failed to fetch incidents'); return r.json(); },
-            async handleIncidentAction(id, action) { await fetch(${API_BASE_URL}/incidents/${id}/${action}, { method: 'POST' }); },
-            async checkStatus() { await fetch(API_BASE_URL + '/users'); },
-            async getAdmins() { const r = await fetch(${API_BASE_URL}/admins); if (!r.ok) throw new Error('Failed to fetch admins'); return r.json(); },
-            async addAdmin(data) { return fetch(${API_BASE_URL}/admins, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); },
-            async removeAdmin(cpf) { return fetch(${API_BASE_URL}/admins/${cpf}, { method: 'DELETE' }); }
+            async getUsers() {
+                const response = await fetch(`${API_BASE_URL}/users`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            },
+            async addUser(user) {
+                const response = await fetch(`${API_BASE_URL}/users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user)
+                });
+                return response;
+            },
+            async removeUser(userId) {
+                await fetch(`${API_BASE_URL}/users/${userId}`, { method: 'DELETE' });
+            },
+            async login(cpf, password) {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cpf, password })
+                });
+                return response.ok;
+            },
+            async triggerPanic(userId) {
+                await fetch(`${API_BASE_URL}/panic`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId })
+                });
+            },
+            async getIncidents() {
+                const response = await fetch(`${API_BASE_URL}/incidents`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            },
+            async handleIncidentAction(incidentId, action) {
+                await fetch(`${API_BASE_URL}/incidents/${incidentId}/${action}`, { method: 'POST' });
+            },
+            async checkStatus() {
+                // Usamos um endpoint que deve responder rápido, como o de usuários
+                await fetch(API_BASE_URL + '/users');
+            }
         };
 
+        // --- Lógica da Interface do Usuário ---
         const userSelector = document.getElementById('user-selector');
         const panicButton = document.getElementById('panic-button');
         const panicTimerLabel = document.getElementById('panic-timer-label');
-        let pressTimer, pressStartTime;
+        
+        let pressTimer;
+        let pressStartTime;
 
         const updateUserDropdown = async () => {
             try {
@@ -213,19 +245,22 @@
             pressTimer = setInterval(() => {
                 const elapsed = Date.now() - pressStartTime;
                 if (elapsed >= 3000) {
-                    clearInterval(pressTimer); pressTimer = null;
+                    clearInterval(pressTimer);
+                    pressTimer = null;
                     panicTimerLabel.textContent = 'ALERTA ENVIADO!';
                     api.triggerPanic(userSelector.value);
                     setTimeout(() => panicTimerLabel.textContent = '\u00A0', 2000);
                 } else {
-                    panicTimerLabel.textContent = Segure por mais ${((3000 - elapsed) / 1000).toFixed(1)}s;
+                    const remaining = ((3000 - elapsed) / 1000).toFixed(1);
+                    panicTimerLabel.textContent = `Segure por mais ${remaining}s`;
                 }
             }, 100);
         };
 
         const releasePanicPress = () => {
             if (!pressTimer) return;
-            clearInterval(pressTimer); pressTimer = null;
+            clearInterval(pressTimer);
+            pressTimer = null;
             if (Date.now() - pressStartTime < 3000) {
                 panicTimerLabel.textContent = 'Acionamento cancelado';
                 setTimeout(() => panicTimerLabel.textContent = '\u00A0', 2000);
@@ -239,12 +274,11 @@
         panicButton.addEventListener('mouseleave', releasePanicPress);
         panicButton.addEventListener('touchend', releasePanicPress);
 
+        // --- Lógica da Interface do Administrador ---
         const adminLoginForm = document.getElementById('admin-login-form');
         const addUserForm = document.getElementById('add-user-form');
         const userListPanel = document.getElementById('user-list-panel');
         const alertsPanel = document.getElementById('alerts-panel');
-        const addAdminForm = document.getElementById('add-admin-form');
-        const adminListPanel = document.getElementById('admin-list-panel');
         let incidentPollingInterval;
 
         const updateUserList = async () => {
@@ -254,43 +288,22 @@
                 users.forEach(user => {
                     const div = document.createElement('div');
                     div.className = 'flex justify-between items-center bg-white/10 p-2 rounded';
-                    div.innerHTML = <span>${user.name} (${user.id})</span>;
+                    div.innerHTML = `<span>${user.name} (${user.id})</span>`;
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Excluir';
                     deleteBtn.className = 'bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-sm';
-                    deleteBtn.onclick = async () => { await api.removeUser(user.id); updateUserList(); updateUserDropdown(); };
+                    deleteBtn.onclick = async () => {
+                        await api.removeUser(user.id);
+                        updateUserList();
+                        updateUserDropdown();
+                    };
                     div.appendChild(deleteBtn);
                     userListPanel.appendChild(div);
                 });
-            } catch (error) { userListPanel.innerHTML = '<p>Erro ao carregar lista.</p>'; }
-        };
-
-        const updateAdminList = async () => {
-            try {
-                const admins = await api.getAdmins();
-                adminListPanel.innerHTML = '';
-                admins.forEach(admin => {
-                    const div = document.createElement('div');
-                    div.className = 'flex justify-between items-center bg-white/10 p-2 rounded';
-                    div.innerHTML = <div><p class="font-semibold">${admin.name}</p><p class="text-sm text-gray-300">${admin.cpf}</p></div>;
-                    if (admin.cpf !== '111.222.333-44') { // Previne exclusão do admin principal
-                        const deleteBtn = document.createElement('button');
-                        deleteBtn.textContent = 'Excluir';
-                        deleteBtn.className = 'bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-sm';
-                        deleteBtn.onclick = async () => { 
-                            const res = await api.removeAdmin(admin.cpf);
-                            if (res.ok) {
-                                updateAdminList();
-                            } else {
-                                const err = await res.json();
-                                alert(Erro: ${err.error});
-                            }
-                        };
-                        div.appendChild(deleteBtn);
-                    }
-                    adminListPanel.appendChild(div);
-                });
-            } catch (error) { adminListPanel.innerHTML = '<p class="text-red-400">Erro ao carregar lista de admins.</p>'; }
+            } catch (error) {
+                console.error("Falha ao buscar usuários para gerenciamento:", error);
+                userListPanel.innerHTML = '<p>Erro ao carregar lista.</p>';
+            }
         };
 
         const updateAlertsList = async () => {
@@ -298,63 +311,80 @@
                 const incidents = await api.getIncidents();
                 alertsPanel.innerHTML = '';
                 if (incidents.length === 0) {
-                     alertsPanel.innerHTML = '<p class="text-center text-gray-400">Nenhum alerta ativo.</p>';
+                     alertsPanel.innerHTML = '<p class="text-center text-gray-400">Nenhum alerta ativo no momento.</p>';
                 }
                 incidents.forEach(incident => {
+                    const state = {
+                        statusName: incident.state.class.split('.').pop().replace('State', ''),
+                    };
                     const card = document.createElement('div');
                     card.className = 'p-3 rounded-lg border bg-white/5';
-                    card.innerHTML = <p class="font-bold">Incidente #${incident.id} - ${incident.state.statusName}</p><p>Usuário: ${incident.user.name}</p><p>Local: ${incident.location}</p><div class="mt-2 flex gap-2 justify-end" id="actions-${incident.id}"></div>;
+
+                    card.innerHTML = `
+                        <p class="font-bold">Incidente #${incident.id} - ${state.statusName}</p>
+                        <p>Usuário: ${incident.user.name}</p>
+                        <p>Local: ${incident.location}</p>
+                        <div class="mt-2 flex gap-2 justify-end" id="actions-${incident.id}"></div>
+                    `;
                     alertsPanel.appendChild(card);
-                    const actionsContainer = card.querySelector(#actions-${incident.id});
+
+                    const actionsContainer = card.querySelector(`#actions-${incident.id}`);
                     const createActionButton = (text, action) => {
                         const btn = document.createElement('button');
                         btn.textContent = text;
                         btn.className = 'bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-sm';
-                        btn.onclick = async () => { await api.handleIncidentAction(incident.id, action); updateAlertsList(); };
+                        btn.onclick = async () => {
+                            await api.handleIncidentAction(incident.id, action);
+                            updateAlertsList();
+                        };
                         return btn;
                     };
-                    if (incident.state.statusName === 'Pendente') {
+
+                    if (state.statusName === 'Pending') {
                         actionsContainer.appendChild(createActionButton('Confirmar', 'confirm'));
                         actionsContainer.appendChild(createActionButton('Cancelar', 'cancel'));
-                    } else if (incident.state.statusName === 'Em Atendimento') {
+                    } else if (state.statusName === 'InProgress') {
                         actionsContainer.appendChild(createActionButton('Resolver', 'resolve'));
                         actionsContainer.appendChild(createActionButton('Falso Alarme', 'markasfalse'));
                     }
                 });
-            } catch (error) { alertsPanel.innerHTML = '<p class="text-center text-red-400">Falha ao conectar.</p>'; }
+            } catch (error) {
+                console.error("Falha ao buscar incidentes:", error);
+                alertsPanel.innerHTML = '<p class="text-center text-red-400">Falha ao conectar com o servidor.</p>';
+            }
         };
         
         adminLoginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const success = await api.login(document.getElementById('admin-cpf').value, document.getElementById('admin-password').value);
+            const cpf = document.getElementById('admin-cpf').value;
+            const password = document.getElementById('admin-password').value;
+            const success = await api.login(cpf, password);
             if (success) {
                 showView('adminDashboard');
                 updateUserList();
-                updateAdminList();
                 updateAlertsList();
                 incidentPollingInterval = setInterval(updateAlertsList, 5000);
-            } else { alert('CPF ou senha inválidos.'); }
+            } else {
+                alert('CPF ou senha inválidos.');
+            }
         });
 
         addUserForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const user = { id: document.getElementById('new-user-id').value, name: document.getElementById('new-user-name').value, type: document.getElementById('new-user-type').value };
-            const response = await api.addUser(user);
-            if(response.ok) { updateUserList(); updateUserDropdown(); addUserForm.reset(); }
-            else { const err = await response.json(); alert(Erro: ${err.error}); }
-        });
-
-        addAdminForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const data = {
-                name: document.getElementById('new-admin-name').value,
-                cpf: document.getElementById('new-admin-cpf').value,
-                password: document.getElementById('new-admin-password').value,
-                masterPassword: document.getElementById('master-password').value
+            const user = {
+                id: document.getElementById('new-user-id').value,
+                name: document.getElementById('new-user-name').value,
+                type: document.getElementById('new-user-type').value
             };
-            const response = await api.addAdmin(data);
-            if(response.ok) { updateAdminList(); addAdminForm.reset(); }
-            else { const err = await response.json(); alert(Erro: ${err.error}); }
+            const response = await api.addUser(user);
+            if(response.ok) {
+                updateUserList();
+                updateUserDropdown();
+                addUserForm.reset();
+            } else {
+                const error = await response.json();
+                alert(`Erro: ${error.error}`);
+            }
         });
         
         document.getElementById('logout-btn').addEventListener('click', () => {
@@ -362,10 +392,17 @@
             showView('profile');
         });
 
-        document.getElementById('show-user-view-btn').addEventListener('click', () => { showView('user'); updateUserDropdown(); });
+        // === NAVEGAÇÃO ENTRE TELAS ===
+        document.getElementById('show-user-view-btn').addEventListener('click', () => {
+            showView('user');
+            updateUserDropdown();
+        });
         document.getElementById('show-admin-login-btn').addEventListener('click', () => showView('adminLogin'));
-        document.querySelectorAll('.back-to-profile-selection').forEach(btn => btn.addEventListener('click', () => showView('profile')));
+        document.querySelectorAll('.back-to-profile-selection').forEach(btn => {
+            btn.addEventListener('click', () => showView('profile'));
+        });
 
+        // === INICIALIZAÇÃO E VERIFICAÇÃO DE STATUS ===
         const checkServerStatus = async () => {
             serverStatusEl.textContent = 'Conectando ao servidor...';
             serverStatusEl.className = 'text-sm mt-4 font-semibold text-yellow-300';
@@ -374,13 +411,14 @@
                 serverStatusEl.textContent = '✅ Conectado ao servidor';
                 serverStatusEl.className = 'text-sm mt-4 font-semibold text-green-300';
             } catch (error) {
-                serverStatusEl.textContent = '❌ Falha ao conectar ao servidor. Verifique se o backend está online.';
+                console.error("Falha na conexão inicial com o servidor:", error);
+                serverStatusEl.textContent = '❌ Falha ao conectar ao servidor. Verifique se o backend está online e a URL da API está correta.';
                 serverStatusEl.className = 'text-sm mt-4 font-semibold text-red-400';
             }
         };
 
         showView('profile');
-        checkServerStatus();
+        checkServerStatus(); // Verifica a conexão ao carregar a página
     });
     </script>
 
