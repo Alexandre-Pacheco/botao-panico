@@ -17,9 +17,6 @@ A aplicação está publicada na nuvem e pode ser acessada através do link abai
 <img width="1165" height="1092" alt="Opera Instantâneo_2025-07-30_095021_gemini google com" src="https://github.com/user-attachments/assets/7a5ea518-677b-48a4-abb1-120a6cd55500" />
 
 
-![Uploading Opera Instantâneo_2025-07-30_095021_gemini.google.com.png…]()
-
-
 
 
 O Sistema de Botão de Pânico é uma solução de segurança para a comunidade acadêmica do IFPB. O projeto foi construído utilizando uma arquitetura cliente-servidor moderna para demonstrar a aplicação de padrões de projeto num ambiente realista.
