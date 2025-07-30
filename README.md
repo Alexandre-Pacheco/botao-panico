@@ -1,4 +1,4 @@
-# **Sistema de Botão de Pânico \- IFPB (Arquitetura Cliente-Servidor)**
+# Sistema de Botão de Pânico \- IFPB 
 
 Este projeto foi desenvolvido por **Alexandre Freitas de Lima Pacheco** e **Robson Luan Fernandes Pereira** para a disciplina de Padrões de Projetos do curso de Engenharia de Computação do IFPB.
 
@@ -14,10 +14,14 @@ A aplicação está publicada na nuvem e pode ser acedida através dos links aba
 ## **✨ Imagens da Aplicação🎯 Sobre o Projeto**
 
 ## 
+<img width="1163" height="557" alt="Opera Instantâneo_2025-07-30_030802_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/2095418f-57b7-490f-8399-46e10c86dd9a" />
+<img width="997" height="712" alt="Opera Instantâneo_2025-07-30_030841_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/c9e573b8-5e6c-4ad3-94e6-0e2f2d177b4e" />
+<img width="1105" height="1275" alt="Opera Instantâneo_2025-07-30_030859_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/e71f1b5c-4a41-442c-8745-c0579d38af50" />
+<img width="1076" height="798" alt="Opera Instantâneo_2025-07-30_030918_alexandre-pacheco github io" src="https://github.com/user-attachments/assets/24248114-b660-4572-ad38-b8f4fde420f5" />
 
-| Tela de Seleção de Perfil | Painel do Utilizador | Login do Ad | Painel do Administrador |
-| :---- | :---- | :---- | :---- |
-|  |  |  |  |
+
+
+
 
 O Sistema de Botão de Pânico é uma solução de segurança para a comunidade acadêmica do IFPB. O projeto foi construído utilizando uma arquitetura cliente-servidor moderna para demonstrar a aplicação de padrões de projeto num ambiente realista.
 
