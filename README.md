@@ -4,12 +4,9 @@ Este projeto foi desenvolvido por **Alexandre Freitas de Lima Pacheco** e **Robs
 
 ### **🚀 Demonstração ao Vivo**
 
-A aplicação está publicada na nuvem e pode ser acedida através dos links abaixo:
+A aplicação está publicada na nuvem e pode ser acessada através do link abaixo:
 
-* **Aplicação Frontend (Interface do Utilizador):**  
-  * [**https://alexandre-pacheco.github.io/botao-panico/**](https://www.google.com/search?q=https://alexandre-pacheco.github.io/botao-panico/)  
-* **Status do Servidor Backend:**  
-  * [**https://servidor-panico-ifpb.onrender.com/api/users**](https://www.google.com/search?q=https://servidor-panico-ifpb.onrender.com/api/users)
+  https://alexandre-pacheco.github.io/botao-panico/
 
 ## **✨ Imagens da Aplicação🎯 Sobre o Projeto**
 
