@@ -165,17 +165,17 @@
         };
 
         const api = {
-            async getUsers() { const r = await fetch(${API_BASE_URL}/users); if (!r.ok) throw new Error('Failed to fetch users'); return r.json(); },
-            async addUser(user) { return fetch(${API_BASE_URL}/users, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) }); },
-            async removeUser(userId) { await fetch(${API_BASE_URL}/users/${userId}, { method: 'DELETE' }); },
-            async login(cpf, password) { const r = await fetch(${API_BASE_URL}/login, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cpf, password }) }); return r.ok; },
-            async triggerPanic(userId) { await fetch(${API_BASE_URL}/panic, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId }) }); },
-            async getIncidents() { const r = await fetch(${API_BASE_URL}/incidents); if (!r.ok) throw new Error('Failed to fetch incidents'); return r.json(); },
-            async handleIncidentAction(id, action) { await fetch(${API_BASE_URL}/incidents/${id}/${action}, { method: 'POST' }); },
+            async getUsers() { const r = await fetch(`${API_BASE_URL}/users`); if (!r.ok) throw new Error('Failed to fetch users'); return r.json(); },
+            async addUser(user) { return fetch(`${API_BASE_URL}/users`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) }); },
+            async removeUser(userId) { await fetch(`${API_BASE_URL}/users/${userId}`, { method: 'DELETE' }); },
+            async login(cpf, password) { const r = await fetch(`${API_BASE_URL}/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cpf, password }) }); return r.ok; },
+            async triggerPanic(userId) { await fetch(`${API_BASE_URL}/panic`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId }) }); },
+            async getIncidents() { const r = await fetch(`${API_BASE_URL}/incidents`); if (!r.ok) throw new Error('Failed to fetch incidents'); return r.json(); },
+            async handleIncidentAction(id, action) { await fetch(`${API_BASE_URL}/incidents/${id}/${action}`, { method: 'POST' }); },
             async checkStatus() { await fetch(API_BASE_URL + '/users'); },
-            async getAdmins() { const r = await fetch(${API_BASE_URL}/admins); if (!r.ok) throw new Error('Failed to fetch admins'); return r.json(); },
-            async addAdmin(data) { return fetch(${API_BASE_URL}/admins, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); },
-            async removeAdmin(cpf) { return fetch(${API_BASE_URL}/admins/${cpf}, { method: 'DELETE' }); }
+            async getAdmins() { const r = await fetch(`${API_BASE_URL}/admins`); if (!r.ok) throw new Error('Failed to fetch admins'); return r.json(); },
+            async addAdmin(data) { return fetch(`${API_BASE_URL}/admins`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); },
+            async removeAdmin(cpf) { return fetch(`${API_BASE_URL}/admins/${cpf}`, { method: 'DELETE' }); }
         };
 
         const userSelector = document.getElementById('user-selector');
@@ -218,7 +218,7 @@
                     api.triggerPanic(userSelector.value);
                     setTimeout(() => panicTimerLabel.textContent = '\u00A0', 2000);
                 } else {
-                    panicTimerLabel.textContent = Segure por mais ${((3000 - elapsed) / 1000).toFixed(1)}s;
+                    panicTimerLabel.textContent = `Segure por mais ${((3000 - elapsed) / 1000).toFixed(1)}s`;
                 }
             }, 100);
         };
@@ -254,7 +254,7 @@
                 users.forEach(user => {
                     const div = document.createElement('div');
                     div.className = 'flex justify-between items-center bg-white/10 p-2 rounded';
-                    div.innerHTML = <span>${user.name} (${user.id})</span>;
+                    div.innerHTML = `<span>${user.name} (${user.id})</span>`;
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Excluir';
                     deleteBtn.className = 'bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-sm';
@@ -272,7 +272,7 @@
                 admins.forEach(admin => {
                     const div = document.createElement('div');
                     div.className = 'flex justify-between items-center bg-white/10 p-2 rounded';
-                    div.innerHTML = <div><p class="font-semibold">${admin.name}</p><p class="text-sm text-gray-300">${admin.cpf}</p></div>;
+                    div.innerHTML = `<div><p class="font-semibold">${admin.name}</p><p class="text-sm text-gray-300">${admin.cpf}</p></div>`;
                     if (admin.cpf !== '111.222.333-44') { // Previne exclusão do admin principal
                         const deleteBtn = document.createElement('button');
                         deleteBtn.textContent = 'Excluir';
@@ -283,7 +283,7 @@
                                 updateAdminList();
                             } else {
                                 const err = await res.json();
-                                alert(Erro: ${err.error});
+                                alert(`Erro: ${err.error}`);
                             }
                         };
                         div.appendChild(deleteBtn);
@@ -303,9 +303,9 @@
                 incidents.forEach(incident => {
                     const card = document.createElement('div');
                     card.className = 'p-3 rounded-lg border bg-white/5';
-                    card.innerHTML = <p class="font-bold">Incidente #${incident.id} - ${incident.state.statusName}</p><p>Usuário: ${incident.user.name}</p><p>Local: ${incident.location}</p><div class="mt-2 flex gap-2 justify-end" id="actions-${incident.id}"></div>;
+                    card.innerHTML = `<p class="font-bold">Incidente #${incident.id} - ${incident.state.statusName}</p><p>Usuário: ${incident.user.name}</p><p>Local: ${incident.location}</p><div class="mt-2 flex gap-2 justify-end" id="actions-${incident.id}"></div>`;
                     alertsPanel.appendChild(card);
-                    const actionsContainer = card.querySelector(#actions-${incident.id});
+                    const actionsContainer = card.querySelector(`#actions-${incident.id}`);
                     const createActionButton = (text, action) => {
                         const btn = document.createElement('button');
                         btn.textContent = text;
@@ -341,7 +341,7 @@
             const user = { id: document.getElementById('new-user-id').value, name: document.getElementById('new-user-name').value, type: document.getElementById('new-user-type').value };
             const response = await api.addUser(user);
             if(response.ok) { updateUserList(); updateUserDropdown(); addUserForm.reset(); }
-            else { const err = await response.json(); alert(Erro: ${err.error}); }
+            else { const err = await response.json(); alert(`Erro: ${err.error}`); }
         });
 
         addAdminForm.addEventListener('submit', async (e) => {
@@ -354,7 +354,7 @@
             };
             const response = await api.addAdmin(data);
             if(response.ok) { updateAdminList(); addAdminForm.reset(); }
-            else { const err = await response.json(); alert(Erro: ${err.error}); }
+            else { const err = await response.json(); alert(`Erro: ${err.error}`); }
         });
         
         document.getElementById('logout-btn').addEventListener('click', () => {
