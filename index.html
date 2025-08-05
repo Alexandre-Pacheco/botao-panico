@@ -25,6 +25,17 @@
             70% { transform: scale(1.2); opacity: 0.5; }
             100% { transform: scale(1.3); opacity: 0; }
         }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-blue-800 text-white flex items-center justify-center min-h-screen">
@@ -34,18 +45,20 @@
         <header class="text-center mb-8">
             <h1 class="text-4xl font-bold">Sistema de Pânico IFPB</h1>
             <p class="text-lg mt-2">Uma solução para a segurança da comunidade acadêmica.</p>
-            <p id="server-status" class="text-sm mt-4 font-semibold"></p>
+            <p id="server-status" class="text-sm mt-4 font-semibold h-5"></p>
         </header>
 
         <!-- TELA 1: SELEÇÃO DE PERFIL -->
         <div id="profile-selection-view" class="text-center max-w-lg mx-auto">
             <h2 class="text-2xl font-semibold mb-6">Selecione seu perfil de acesso</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <button id="show-user-view-btn" class="bg-white/20 hover:bg-white/30 p-8 rounded-lg text-xl font-semibold transition-all duration-300">
-                    Usuário da Comunidade<br><span class="text-sm font-normal">(Alunos e Professores)</span>
+                <button id="show-user-view-btn" class="bg-white/20 hover:bg-white/30 p-8 rounded-lg text-xl font-semibold transition-all duration-300 flex flex-col items-center justify-center min-h-[160px]">
+                    <span class="button-text">Usuário da Comunidade<br><span class="text-sm font-normal">(Alunos e Professores)</span></span>
+                    <div class="loader hidden"></div>
                 </button>
-                <button id="show-admin-login-btn" class="bg-white/20 hover:bg-white/30 p-8 rounded-lg text-xl font-semibold transition-all duration-300">
-                    Administrador<br><span class="text-sm font-normal">(Gestão e Monitoramento)</span>
+                <button id="show-admin-login-btn" class="bg-white/20 hover:bg-white/30 p-8 rounded-lg text-xl font-semibold transition-all duration-300 flex flex-col items-center justify-center min-h-[160px]">
+                    <span class="button-text">Administrador<br><span class="text-sm font-normal">(Gestão e Monitoramento)</span></span>
+                    <div class="loader hidden"></div>
                 </button>
             </div>
         </div>
@@ -362,25 +375,51 @@
             showView('profile');
         });
 
-        document.getElementById('show-user-view-btn').addEventListener('click', () => { showView('user'); updateUserDropdown(); });
-        document.getElementById('show-admin-login-btn').addEventListener('click', () => showView('adminLogin'));
-        document.querySelectorAll('.back-to-profile-selection').forEach(btn => btn.addEventListener('click', () => showView('profile')));
+        const showLoading = (button, show = true) => {
+            const text = button.querySelector('.button-text');
+            const loader = button.querySelector('.loader');
+            if (show) {
+                text.classList.add('hidden');
+                loader.classList.remove('hidden');
+                button.disabled = true;
+            } else {
+                text.classList.remove('hidden');
+                loader.classList.add('hidden');
+                button.disabled = false;
+            }
+        };
 
-        const checkServerStatus = async () => {
-            serverStatusEl.textContent = 'Conectando ao servidor...';
+        const handleProfileSelection = async (button, nextView) => {
+            showLoading(button);
+            serverStatusEl.textContent = 'Aguarde, conectando ao servidor...';
             serverStatusEl.className = 'text-sm mt-4 font-semibold text-yellow-300';
             try {
                 await api.checkStatus();
                 serverStatusEl.textContent = '✅ Conectado ao servidor';
                 serverStatusEl.className = 'text-sm mt-4 font-semibold text-green-300';
+                showView(nextView);
+                if (nextView === 'user') {
+                    updateUserDropdown();
+                }
             } catch (error) {
-                serverStatusEl.textContent = '❌ Falha ao conectar ao servidor. Verifique se o backend está online.';
+                serverStatusEl.textContent = '❌ Falha ao conectar ao servidor. O servidor pode estar a iniciar. Tente novamente em 1 minuto.';
                 serverStatusEl.className = 'text-sm mt-4 font-semibold text-red-400';
+            } finally {
+                showLoading(button, false);
             }
         };
 
+        document.getElementById('show-user-view-btn').addEventListener('click', (e) => handleProfileSelection(e.currentTarget, 'user'));
+        document.getElementById('show-admin-login-btn').addEventListener('click', (e) => handleProfileSelection(e.currentTarget, 'adminLogin'));
+        
+        document.querySelectorAll('.back-to-profile-selection').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showView('profile');
+                serverStatusEl.textContent = ''; // Limpa o status ao voltar
+            });
+        });
+
         showView('profile');
-        checkServerStatus();
     });
     </script>
 
