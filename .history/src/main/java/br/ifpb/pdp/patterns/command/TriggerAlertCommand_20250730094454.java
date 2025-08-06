@@ -16,7 +16,7 @@ public class TriggerAlertCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.println("[Command] Executando TriggerAlertCommando para: " + user.getName());
+        System.out.println("[Command] Executando TriggerAlertCommand para: " + user.getName());
         publisher.notify(this);
     }
 
