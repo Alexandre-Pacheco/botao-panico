@@ -4,7 +4,7 @@ import br.ifpb.pdp.models.User;
 
 public class UserFactory {
     public User createUser(String id, String name, String type) {
-        System.out.println("[Factory Method] Criando novo usuário: " + name);
+        System.out.println("[Factory Method] Criando usuário: " + name);
         return new User(id, name, type);
     }
 }
