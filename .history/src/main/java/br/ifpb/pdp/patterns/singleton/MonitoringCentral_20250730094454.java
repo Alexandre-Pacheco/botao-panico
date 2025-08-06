@@ -34,7 +34,7 @@ public class MonitoringCentral implements AlertObserver {
             synchronized (activeIncidents) {
                 activeIncidents.add(newIncident);
             }
-            System.out.println("[Observer] Central notificada. Novo acontecimento #" + newId + " para " + newIncident.getUser().getName());
+            System.out.println("[Observer] Central notificada. Novo incidente #" + newId + " para " + newIncident.getUser().getName());
         }
     }
 
